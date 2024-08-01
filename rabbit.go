@@ -1,5 +1,26 @@
 package rabbit
 
+/*
+example:
+
+	...
+
+	import (
+		rabbit "..."
+	)
+
+	func main() {
+		var r rabbit.Rabbit
+
+		r.Setup()
+		r.TopicQueue("api_topic", "api_data")
+
+		//... fetch data from api ...
+
+		r.SendMessage(apiData)
+	}
+*/
+
 import (
 	"context"
 	"fmt"
@@ -390,13 +411,17 @@ func (rabbit *Rabbit) NewTopic(topicName string) (err error) {
 	return
 }
 
-func (rabbit *Rabbit) (queueName string) (err error) {
+func (rabbit *Rabbit) TopicQueue(topicName string, queueName string) (err error) {
 
 	/*
-
-		Helper used to create a Durable queue.
-
+		Helper used to create a topic exchange and a queue
 	*/
+
+	err = rabbit.NewTopic(topicName)
+
+	if err != nil {
+		return
+	}
 
 	err = rabbit.QueueDeclare(
 		queueName, // name
