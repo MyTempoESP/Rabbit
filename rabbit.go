@@ -11,10 +11,6 @@ import (
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
-/* TODO's:
-- Cover the whole code with logging
-*/
-
 type Rabbit /* RabbitMQ connection */ struct {
 	host string
 	port string
@@ -356,31 +352,60 @@ func (rabbit *Rabbit) Connect() (err error) {
 	return
 }
 
-func (rabbit *Rabbit) Setup() {
-	err := rabbit.setupServer()
-	failOnError(err, "Failed to setup server")
+func (rabbit *Rabbit) Setup() (err error) {
+	err = rabbit.setupServer()
+
+	if err != nil {
+		return fmt.Errorf("Failed to setup server: %s", err)
+	}
 
 	err = rabbit.setupAuth()
-	failOnError(err, "Failed to setup authentication")
+
+	if err != nil {
+		return fmt.Errorf("Failed to setup authentication: %s", err)
+	}
 
 	err = rabbit.Connect()
-	failOnError(err, "Failed to connect to RabbitMQ")
 
+	if err != nil {
+		return fmt.Errorf("Failed to connect to RabbitMQ: %s", err)
+	}
+
+	return
+}
+
+/* helpers */
+
+func (rabbit *Rabbit) NewTopic(topicName string) (err error) {
 	err = rabbit.ExchangeDeclare(
-		"api_exchange", // name
-		"topic",        // type
-		true,           // durable?
+		topicName, // name
+		"topic",   // type
+		true,      // durable?
 	)
-	failOnError(err, "Failed to declare an exchange")
+
+	if err != nil {
+		return fmt.Errorf("Failed to declare an exchange: %s", err)
+	}
+
+	return
+}
+
+func (rabbit *Rabbit) (queueName string) (err error) {
+
+	/*
+
+		Helper used to create a Durable queue.
+
+	*/
 
 	err = rabbit.QueueDeclare(
-		"api_data", // name
-		true,       // durable?
+		queueName, // name
+		true,      // durable?
 	)
-	failOnError(err, "Failed to declare a queue")
 
-	//failOnError(err, "Failed to declare an exchange")
-	//failOnError(err, "Failed to publish a message")
+	if err != nil {
+		return fmt.Errorf("Failed to declare a queue: %s", err)
+	}
 
-	//log.Printf(" [x] Sent %s", body)
+	return
 }
