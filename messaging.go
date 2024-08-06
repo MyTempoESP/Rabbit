@@ -2,7 +2,6 @@ package rabbit
 
 import (
 	"context"
-	"log"
 	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -11,8 +10,6 @@ import (
 func (rabbit *Rabbit) SendTo(msg string, exchangeName string, routingKey string, timeout_s int) (err error) {
 
 	var channel *amqp.Channel
-
-	log.Println("Trying to send message through RabbitMQ")
 
 	timeout_duration := time.Duration(timeout_s)
 
@@ -26,8 +23,6 @@ func (rabbit *Rabbit) SendTo(msg string, exchangeName string, routingKey string,
 	}
 
 	defer channel.Close()
-
-	log.Printf("Publishing message to exchange %s, queue(s): %s", rabbit.exchange, rabbit.routingKey)
 
 	err = channel.PublishWithContext(ctx,
 		rabbit.exchange, /* it's as easy as this */

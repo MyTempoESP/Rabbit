@@ -1,8 +1,6 @@
 package rabbit
 
 import (
-	"log"
-
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
@@ -22,8 +20,6 @@ func (rabbit *Rabbit) QueueDeclare(channel *amqp.Channel, isDurable bool, queueN
 
 		returns an error status in case the Queue cannot be created.
 	*/
-
-	log.Printf("Declaring queue %s", queueName)
 
 	_, err = channel.QueueDeclare(
 		queueName,

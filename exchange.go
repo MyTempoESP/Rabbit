@@ -1,8 +1,6 @@
 package rabbit
 
 import (
-	"log"
-
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
@@ -26,8 +24,6 @@ func (rabbit *Rabbit) ExchangeDeclare(chanel *amqp.Channel, exchangeName string,
 		created exchange name.
 
 	*/
-
-	log.Printf("Declaring exchange %s", exchangeName)
 
 	err = channel.ExchangeDeclare(
 		exchangeName,

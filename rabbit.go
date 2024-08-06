@@ -33,23 +33,7 @@ example:
 
 import (
 	"fmt"
-	"log"
-
-	amqp "github.com/rabbitmq/amqp091-go"
 )
-
-func (rabbit *Rabbit) Channel() (channel *amqp.Channel, err error) {
-
-	log.Println("Opening channel")
-
-	channel, err = rabbit.conn.Channel()
-
-	if err != nil {
-		return
-	}
-
-	return
-}
 
 func (rabbit *Rabbit) Setup() (err error) {
 	err = rabbit.setupServer()
