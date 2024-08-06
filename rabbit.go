@@ -1,36 +1,5 @@
 package rabbit
 
-/*
-example:
-
-	...
-
-	import (
-		rabbit "..."
-	)
-
-	func main() {
-		var r rabbit.Rabbit
-
-		err := r.Setup()
-		// r.TopicQueue("api_topic", "api_data")
-
-		err := r.Topic("api_topic")
-		if err != nil {
-			return 1
-		}
-
-		err = r.QueueDeclare("api.data", true)
-		if err != nil {
-			return 1
-		}
-
-		//... fetch data from api ...
-
-		r.SendMessage(apiData)
-	}
-*/
-
 import (
 	"fmt"
 )

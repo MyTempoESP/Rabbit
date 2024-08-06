@@ -4,13 +4,6 @@ import (
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
-type RabbitChannel struct {
-	channel *amqp.Channel
-
-	/* Channel for notification on close */
-	closed chan *amqp.Error
-}
-
 type Rabbit /* RabbitMQ connection */ struct {
 	host string
 	port string
@@ -18,10 +11,13 @@ type Rabbit /* RabbitMQ connection */ struct {
 	user string
 	pass string
 
-	exchange   string /* current exchange name */
-	routingKey string /*select Queue to which msg will b sent*/
-
 	conn *amqp.Connection /* current open connection (Connection pointer) */
+}
 
-	channel RabbitChannel
+type Producer struct {
+	rabbit *Rabbit
+}
+
+type Consumer struct {
+	rabbit *Rabbit
 }

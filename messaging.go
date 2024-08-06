@@ -25,8 +25,8 @@ func (rabbit *Rabbit) SendTo(msg string, exchangeName string, routingKey string,
 	defer channel.Close()
 
 	err = channel.PublishWithContext(ctx,
-		rabbit.exchange, /* it's as easy as this */
-		rabbit.routingKey,
+		exchangeName, /* it's as easy as this */
+		routingKey,
 		false, // mandatory
 		false, // immediate
 		amqp.Publishing{
@@ -39,13 +39,6 @@ func (rabbit *Rabbit) SendTo(msg string, exchangeName string, routingKey string,
 			*/
 			//DeliveryMode: 2, /* default: 0 (transient) */
 		})
-
-	return
-}
-
-func (rabbit *Rabbit) SendMessage(msg string, timeout_s int) (err error) {
-
-	err = rabbit.SendTo(msg, rabbit.exchange, rabbit.routingKey, timeout_s)
 
 	return
 }
