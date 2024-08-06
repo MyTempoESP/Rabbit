@@ -48,7 +48,7 @@ func (rabbit *Rabbit) ExchangeDeclare(chanel *amqp.Channel, exchangeName string,
 	return
 }
 
-func (rabbit *Rabbit) CreateExchange(exchangeType string, isDurable bool, exchangeNames ...string) (err error) {
+func (rabbit *Rabbit) CreateExchange(isDurable bool, exchangeType string, exchangeNames ...string) (err error) {
 
 	/* NOTE:
 	This function opens a Channel.
