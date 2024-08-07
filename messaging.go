@@ -33,7 +33,8 @@ func (rabbit *Rabbit) SendTo(msg string, exchangeName string, routingKey string,
 			ContentType: "text/plain", /* "application/json", */
 			Body:        []byte(msg),
 
-			/*	NOTE:
+			/*
+				NOTE:
 				for Persistant messaging, uncomment
 				the following line:
 			*/

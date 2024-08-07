@@ -34,3 +34,13 @@ func (rabbit *Rabbit) Connect() (err error) {
 
 	return
 }
+
+func (rabbit *Rabbit) NotifyClose(c chan *amqp.Error) {
+	if rabbit.conn == nil || rabbit.conn.IsClosed() {
+		c <- nil
+
+		return
+	}
+
+	rabbit.conn.NotifyClose(c)
+}
