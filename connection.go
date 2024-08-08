@@ -10,13 +10,13 @@ import (
 func (rabbit *Rabbit) Connect() (err error) {
 
 	var url string
-	var conn *amqp.Connection /* Connection pointer */
+	var Conn *amqp.Connection /* Connection pointer */
 
 	url = rabbit.url()
 
 	err = backoff.Retry(
 		func() (err error) {
-			conn, err = amqp.Dial(url)
+			Conn, err = amqp.Dial(url)
 
 			return
 		},
@@ -25,22 +25,22 @@ func (rabbit *Rabbit) Connect() (err error) {
 	)
 
 	if err != nil {
-		err = fmt.Errorf("Couldn't connect to RabbitMQ: %s", err)
+		err = fmt.Errorf("Couldn't Connect to RabbitMQ: %s", err)
 
 		return
 	}
 
-	rabbit.conn = conn
+	rabbit.Conn = Conn
 
 	return
 }
 
 func (rabbit *Rabbit) NotifyClose(c chan *amqp.Error) {
-	if rabbit.conn == nil || rabbit.conn.IsClosed() {
-		c <- nil
+	if rabbit.Conn == nil || rabbit.Conn.IsClosed() {
+		close(c)
 
 		return
 	}
 
-	rabbit.conn.NotifyClose(c)
+	rabbit.Conn.NotifyClose(c)
 }

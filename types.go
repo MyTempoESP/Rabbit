@@ -11,13 +11,25 @@ type Rabbit /* RabbitMQ connection */ struct {
 	user string
 	pass string
 
-	conn *amqp.Connection /* current open connection (Connection pointer) */
+	Conn *amqp.Connection /* current open connection (Connection pointer) */
+
+	channel *amqp.Channel
 }
 
-type Producer struct {
-	rabbit *Rabbit
+type Bindings struct {
+	exchange string
+	queue    string
+	key      string
 }
 
-type Consumer struct {
-	rabbit *Rabbit
+type Queue struct {
+	Name      string
+	isDurable bool
+
+	/* Binding */
+	RoutingKey   string
+	ExchangeName string
+
+	/* internal queue */
+	queue amqp.Queue
 }

@@ -6,7 +6,17 @@ import (
 
 func (rabbit *Rabbit) Channel() (channel *amqp.Channel, err error) {
 
-	channel, err = rabbit.conn.Channel()
+	if rabbit.channel != nil || !rabbit.channel.IsClosed() {
+		return
+	}
+
+	channel, err = rabbit.Conn.Channel()
+
+	if err != nil {
+		return
+	}
+
+	rabbit.channel = channel
 
 	return
 }
