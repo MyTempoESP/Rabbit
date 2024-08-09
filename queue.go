@@ -5,6 +5,7 @@ import (
 )
 
 func (rabbit *Rabbit) BindQueues(bindings []Binding) (err error) {
+
 	channel, err := rabbit.Conn.Channel()
 
 	if err != nil {
