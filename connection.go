@@ -2,6 +2,8 @@ package rabbit
 
 import (
 	"fmt"
+	"log"
+	"time"
 
 	backoff "github.com/cenkalti/backoff"
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -14,14 +16,21 @@ func (rabbit *Rabbit) Connect() (err error) {
 
 	url = rabbit.url()
 
+	exp := backoff.NewExponentialBackOff()
+	exp.MaxElapsedTime = 15 * time.Second
+
 	err = backoff.Retry(
 		func() (err error) {
 			Conn, err = amqp.Dial(url)
 
+			if err != nil {
+				log.Println("Trying to connect to RabbitMQ...")
+			}
+
 			return
 		},
 
-		backoff.NewExponentialBackOff(),
+		exp,
 	)
 
 	if err != nil {
