@@ -16,11 +16,40 @@ type Rabbit /* RabbitMQ connection */ struct {
 	channel *amqp.Channel
 }
 
-type Binding struct {
+type binding struct {
 	Queue    string
 	Key      string
 	Exchange string
 
 	/* optional */
 	Durable, AutoDelete, Exclusive bool
+}
+
+func Binding(queue string, key string, exchange string, opts ...bool) (bound binding) {
+
+	bound.Queue = queue
+	bound.Key = key
+	bound.Exchange = exchange
+
+	/* set 'Durable', 'AutoDelete' and 'Exclusive' accordingly */
+	switch len(opts) {
+	case 3:
+		/*
+			falls through if
+			the length of
+			arguments is 3,
+			thus setting the
+			rest of the fields
+			in the struct.
+		*/
+		bound.Exclusive = opts[2]
+		fallthrough
+	case 2:
+		bound.AutoDelete = opts[1]
+		fallthrough
+	case 1:
+		bound.Durable = opts[0]
+	}
+
+	return
 }
