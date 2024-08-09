@@ -4,7 +4,7 @@ import (
 // amqp "github.com/rabbitmq/amqp091-go"
 )
 
-func (rabbit *Rabbit) BindQueues(bindings []binding) (err error) {
+func (rabbit *Rabbit) BindQueues(bindings []Binding) (err error) {
 
 	channel, err := rabbit.Conn.Channel()
 

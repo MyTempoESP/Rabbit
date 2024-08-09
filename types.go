@@ -16,7 +16,7 @@ type Rabbit /* RabbitMQ connection */ struct {
 	channel *amqp.Channel
 }
 
-type binding struct {
+type Binding struct {
 	Queue    string
 	Key      string
 	Exchange string
@@ -25,7 +25,7 @@ type binding struct {
 	Durable, AutoDelete, Exclusive bool
 }
 
-func Binding(queue string, key string, exchange string, opts ...bool) (bound binding) {
+func NewBinding(queue string, key string, exchange string, opts ...bool) (bound Binding) {
 
 	bound.Queue = queue
 	bound.Key = key
