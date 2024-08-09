@@ -16,20 +16,11 @@ type Rabbit /* RabbitMQ connection */ struct {
 	channel *amqp.Channel
 }
 
-type Bindings struct {
-	exchange string
-	queue    string
-	key      string
-}
+type Binding struct {
+	Queue    string
+	Key      string
+	Exchange string
 
-type Queue struct {
-	Name      string
-	isDurable bool
-
-	/* Binding */
-	RoutingKey   string
-	ExchangeName string
-
-	/* internal queue */
-	queue amqp.Queue
+	/* optional */
+	Durable, AutoDelete, Exclusive bool
 }
