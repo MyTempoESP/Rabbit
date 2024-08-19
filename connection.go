@@ -17,7 +17,7 @@ func (rabbit *Rabbit) Connect() (err error) {
 	url = rabbit.url()
 
 	exp := backoff.NewExponentialBackOff()
-	exp.MaxElapsedTime = 15 * time.Second
+	exp.MaxElapsedTime = 20 * time.Second
 
 	err = backoff.Retry(
 		func() (err error) {
@@ -40,6 +40,16 @@ func (rabbit *Rabbit) Connect() (err error) {
 	}
 
 	rabbit.Conn = Conn
+
+	return
+}
+
+func (rabbit *Rabbit) Reconnect() (err error) {
+	if rabbit.Conn != nil {
+		rabbit.Conn.Close()
+	}
+
+	err = rabbit.Connect()
 
 	return
 }

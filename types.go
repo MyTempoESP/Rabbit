@@ -27,9 +27,9 @@ type Binding struct {
 
 func NewBinding(queue string, key string, exchange string, opts ...bool) (bound Binding) {
 
+	bound.Exchange = exchange
 	bound.Queue = queue
 	bound.Key = key
-	bound.Exchange = exchange
 
 	/* set 'Durable', 'AutoDelete' and 'Exclusive' accordingly */
 	switch len(opts) {
