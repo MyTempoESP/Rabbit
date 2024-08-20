@@ -4,6 +4,8 @@ github.com/mytempoesp/rabbit v0.0.1-alpha h1:tabQG9su/MXd9Pnh0+D642vBjOOjqvO4nk7
 github.com/mytempoesp/rabbit v0.0.1-alpha/go.mod h1:+Vo+ylDWtSY6TmRprR6BTGb+/7sf6QsF+8qY/WHF68Q=
 github.com/mytempoesp/rabbit v0.0.1-alpha.0.20240806192558-181ee02db754 h1:YW9Z63UUcCBEsVqeWl1C+d++w6AJh6+fSsi+kmCJGSM=
 github.com/mytempoesp/rabbit v0.0.1-alpha.0.20240806192558-181ee02db754/go.mod h1:+Vo+ylDWtSY6TmRprR6BTGb+/7sf6QsF+8qY/WHF68Q=
+github.com/mytempoesp/rabbit v0.0.1-alpha.0.20240819190648-24936c7a3bb5 h1:3x0mseL2aOsrLYPxb0ziYxblFZROatOgEoEjZBgZP1s=
+github.com/mytempoesp/rabbit v0.0.1-alpha.0.20240819190648-24936c7a3bb5/go.mod h1:+Vo+ylDWtSY6TmRprR6BTGb+/7sf6QsF+8qY/WHF68Q=
 github.com/rabbitmq/amqp091-go v1.10.0 h1:STpn5XsHlHGcecLmMFCtg7mqq0RnD+zFr4uzukfVhBw=
 github.com/rabbitmq/amqp091-go v1.10.0/go.mod h1:Hy4jKW5kQART1u+JkDTF9YYOQUHXqMuhrgxOEeS7G4o=
 go.uber.org/goleak v1.3.0 h1:2K3zAYmnTNqV73imy9J1T3WC+gmCePx2hEGkimedGto=

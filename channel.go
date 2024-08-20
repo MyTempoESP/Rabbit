@@ -9,6 +9,8 @@ import (
 
 func (rabbit *Rabbit) Channel() (channel *amqp.Channel, err error) {
 
+	channel = rabbit.channel
+
 	if rabbit.channel != nil && !rabbit.channel.IsClosed() {
 		return
 	}
