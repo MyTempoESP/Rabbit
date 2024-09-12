@@ -45,7 +45,8 @@ func (rabbit *Rabbit) Connect() (err error) {
 }
 
 func (rabbit *Rabbit) Reconnect() (err error) {
-	if rabbit.Conn != nil {
+
+	if rabbit.Conn != nil && !rabbit.Conn.IsClosed() {
 		rabbit.Conn.Close()
 	}
 
